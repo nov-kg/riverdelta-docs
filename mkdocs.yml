@@ -1,0 +1,6 @@
+site_name: RiverDelta Docs 
+nav:
+- Home: index.md
+- Architecture: architecture.md
+- DevOps: devops.md
+theme: readthedocs
