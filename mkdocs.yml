@@ -3,4 +3,7 @@ nav:
 - Home: index.md
 - Architecture: architecture.md
 - DevOps: devops.md
-theme: readthedocs
+theme: 
+  name: 'mkdocs'
+  color_mode: 'dark'
+  nav_style: 'dark'
