@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>DevOps - Elembo Docs</title>
+        <title>Base de données - Elembo Docs</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -41,10 +41,10 @@
                                 <a href="../architecture/" class="nav-link">Architecture</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../database/" class="nav-link">Base de données</a>
+                                <a href="./" class="nav-link active" aria-current="page">Base de données</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">DevOps</a>
+                                <a href="../devops/" class="nav-link">DevOps</a>
                             </li>
                         </ul>
 
@@ -55,12 +55,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../database/" class="nav-link">
+                                <a rel="prev" href="../architecture/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../devops/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -83,13 +83,9 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#devops" class="nav-link">DevOps</a>
+            <li class="nav-item" data-bs-level="1"><a href="#base-de-donnee" class="nav-link">Base de donnée</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#environnement" class="nav-link">Environnement</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#deploiements" class="nav-link">Déploiements</a>
+            <li class="nav-item" data-bs-level="2"><a href="#accounts" class="nav-link">Accounts</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -100,41 +96,21 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="devops">DevOps</h1>
-<h2 id="environnement">Environnement</h2>
-<table>
-<thead>
-<tr>
-<th>Environnement</th>
-<th>Description</th>
-<th>API</th>
-<th>App</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>dev</code></td>
-<td>Environnement uniquement à but de développement, non stable</td>
-<td>https://c0zxxa808l.execute-api.eu-west-3.amazonaws.com/dev</td>
-<td>https://dev.d2m9fd2puxvkv3.amplifyapp.com/</td>
-</tr>
-<tr>
-<td><code>test</code></td>
-<td>Spécification prête à la validation par l'équipe d'Elembo</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>prod</code></td>
-<td>Environnement de production</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="deploiements">Déploiements</h2>
-<p>Le frontend se déploie automatiquement dans l'environnement relatif à la branche du même nom. Exemple: un merge sur le branche <code>dev</code> déploiera le frontend automatiquement sur le déploiement dev dans Amplify.</p>
-<p>Le backend est pour le moment développé directement via la console web AWS et déployée lors du développement. Un CI/CD est nécessaire pour passer en test.</p></div>
+<h1 id="base-de-donnee">Base de donnée</h1>
+<h2 id="accounts">Accounts</h2>
+<pre><code class="language-json">{
+  &quot;AccountID&quot;: &quot;SUP123&quot;,
+  &quot;AccountType&quot;: &quot;Supplier&quot;, // Supplier ou Customer 
+  &quot;Name&quot;: &quot;Acme Corp.&quot;,
+  &quot;ContactInfo&quot;: {
+    &quot;Email&quot;: &quot;contact@acmecorp.com&quot;,
+    &quot;Phone&quot;: &quot;+123456789&quot;,
+    &quot;Address&quot;: &quot;123 Acme St, Springfield&quot;
+  },
+  &quot;AssociatedProducts&quot;: [&quot;P123&quot;, &quot;P124&quot;, &quot;P125&quot;]
+  &quot;AccountDetails&quot;: {}
+}
+</code></pre></div>
             </div>
         </div>
 
