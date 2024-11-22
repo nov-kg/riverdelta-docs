@@ -1,7 +1,8 @@
-site_name: RiverDelta Docs 
+site_name: Elembo Docs 
 nav:
-- Home: index.md
+- Accueil: index.md
 - Architecture: architecture.md
+- Base de données: database.md
 - DevOps: devops.md
 theme: 
   name: 'mkdocs'

@@ -1,17 +1,14 @@
-# Welcome to MkDocs
+# DevOps
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Environnement
 
-## Commands
+| Environnement | Description | API | App |
+| --- | --- | --- | --- |
+| `dev` | Environnement uniquement à but de développement, non stable | https://c0zxxa808l.execute-api.eu-west-3.amazonaws.com/dev | https://dev.d2m9fd2puxvkv3.amplifyapp.com/ |
+| `test` | Spécification prête à la validation par l'équipe d'Elembo | | |
+| `prod` | Environnement de production | | |
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Déploiements
+Le frontend se déploie automatiquement dans l'environnement relatif à la branche du même nom. Exemple: un merge sur le branche `dev` déploiera le frontend automatiquement sur le déploiement dev dans Amplify.
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Le backend est pour le moment développé directement via la console web AWS et déployée lors du développement. Un CI/CD est nécessaire pour passer en test.
