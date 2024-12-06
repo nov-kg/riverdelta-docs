@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>API - Elembo Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API";
+        var mkdocs_page_input_path = "api.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Elembo Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Accueil</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../database/">Base de données</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">API</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#base-url">Base URL</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#produits">Produits</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#lister-les-produits">Lister les produits</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#recuperer-les-details-dun-produit">Récupérer les détails d'un produit</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creer-un-produit">Créer un produit</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mettre-a-jour-un-produit">Mettre à jour un produit</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supprimer-un-produit">Supprimer un produit</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#lots">Lots</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#creer-un-nouveau-lot">Créer un nouveau lot</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lister-les-lots-dun-produit">Lister les lots d'un produit</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#codes-derreur-communs">Codes d'erreur communs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exemples-dutilisation">Exemples d'utilisation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#lister-les-produits_1">Lister les produits</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ajouter-un-produit">Ajouter un produit</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../devops/">DevOps</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Elembo Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">API</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="documentation-de-lapi">Documentation de l'API</h1>
+<p>Bienvenue dans l'API Produits ! Cette API permet de gérer toutes les requêtes backend.</p>
+<h2 id="base-url">Base URL</h2>
+<p>Les URLs de base de chaque environnement sont documenté dans <a href="../devops/">DevOps</a>.</p>
+<pre><code>https://&lt;aws-api-gateway-url&gt;/&lt;stage&gt;
+</code></pre>
+<h2 id="produits">Produits</h2>
+<h3 id="lister-les-produits">Lister les produits</h3>
+<p>Récupère la liste de tous les produits disponibles.</p>
+<p><code>GET /products</code>  </p>
+<p><strong>Réponse</strong>:</p>
+<pre><code class="language-json">  [
+    {
+        &quot;ProductId&quot;: &quot;12345&quot;,
+        &quot;Name&quot;: &quot;Produit A&quot;,
+        &quot;Category&quot;: &quot;Catégorie 1&quot;,
+        &quot;Description&quot;: &quot;Description du produit A&quot;
+    },
+    {
+        &quot;ProductId&quot;: &quot;67890&quot;,
+        &quot;Name&quot;: &quot;Produit B&quot;,
+        &quot;Category&quot;: &quot;Catégorie 2&quot;,
+        &quot;Description&quot;: &quot;Description du produit B&quot;
+    }
+]
+</code></pre>
+<hr />
+<h3 id="recuperer-les-details-dun-produit">Récupérer les détails d'un produit</h3>
+<p>Récupère les détails d’un produit spécifique.</p>
+<p><code>GET /products/{productId}</code>  </p>
+<p><strong>Paramètre d'URL</strong>:
+- <code>productId</code> (string): ID du produit.</p>
+<p><strong>Réponse</strong>:</p>
+<pre><code class="language-json">{
+    &quot;ProductId&quot;: &quot;12345&quot;,
+    &quot;Name&quot;: &quot;Produit A&quot;,
+    &quot;Category&quot;: &quot;Catégorie 1&quot;,
+    &quot;Description&quot;: &quot;Description du produit A&quot;
+}
+</code></pre>
+<hr />
+<h3 id="creer-un-produit">Créer un produit</h3>
+<p>Ajoute un nouveau produit à la base de données.</p>
+<p><code>POST /products</code>  </p>
+<p><strong>Corps de la requête</strong>:</p>
+<pre><code class="language-json">{
+  &quot;Name&quot;: &quot;Produit C&quot;,
+  &quot;Category&quot;: &quot;Catégorie 3&quot;,
+  &quot;Description&quot;: &quot;Description du produit C&quot;,
+}
+</code></pre>
+<p><strong>Réponse</strong>:</p>
+<ul>
+<li><strong>Code 201</strong>: Produit créé avec succès.</li>
+<li><strong>Code 400</strong>: Erreur dans les données envoyées.</li>
+</ul>
+<hr />
+<h3 id="mettre-a-jour-un-produit">Mettre à jour un produit</h3>
+<p><code>PUT /products/{productId}</code></p>
+<p><strong>Paramètres d'URL</strong>:</p>
+<ul>
+<li><code>productId</code> (string): ID du produit.</li>
+</ul>
+<p><strong>Corps de la requête</strong>:</p>
+<pre><code class="language-json">{
+  &quot;Description&quot;: &quot;Produit C - Mis à jour&quot;,
+}
+</code></pre>
+<p><strong>Réponse</strong>:</p>
+<ul>
+<li><strong>Code 200</strong>: Produit mis à jour.</li>
+<li><strong>Code 404</strong>: Produit non trouvé.</li>
+</ul>
+<hr />
+<h3 id="supprimer-un-produit">Supprimer un produit</h3>
+<p>Supprime un produit spécifique.</p>
+<p><code>DELETE/products/{productId}</code>  </p>
+<p><strong>Paramètres d'URL</strong>:</p>
+<ul>
+<li><code>productId</code> (string): ID du produit.</li>
+</ul>
+<p><strong>Réponse</strong>:</p>
+<ul>
+<li><strong>Code 200</strong>: Produit supprimé.</li>
+<li><strong>Code 404</strong>: Produit non trouvé.</li>
+</ul>
+<hr />
+<h2 id="lots">Lots</h2>
+<h3 id="creer-un-nouveau-lot">Créer un nouveau lot</h3>
+<p>Créer un nouveau lot. Cet API crée une transaction et ajoute un nouveau lot pour le produit désigné. La transaction est automatiquement liée dans le lot.</p>
+<p><code>POST /transactions/receive</code> </p>
+<p><strong>Corps de la requête</strong>:</p>
+<pre><code class="language-json">{
+    &quot;To&quot;: &quot;Lieu de réception&quot;,
+    &quot;TransactionDate&quot;: &quot;2000-01-23T01:23:45.678+09:00&quot;,
+
+}
+</code></pre>
+<p><strong>Réponse</strong>:</p>
+<pre><code class="language-json">{
+    &quot;transactionId&quot;: &quot;89f8dbea-b327-44a7-8a16-ac7632c1d7de&quot;,
+    &quot;productLotId&quot;: &quot;1b974476-3b95-48b4-91ca-1878da48bcdc&quot;
+}
+</code></pre>
+<hr />
+<h3 id="lister-les-lots-dun-produit">Lister les lots d'un produit</h3>
+<p>Envoi la liste des lots d'un produit. Pour chaque lot, retourne également les inventaires et les transactions liées à ce lot.</p>
+<p><code>GET /transactions/{productId}</code></p>
+<p><strong>Paramètres d'URL</strong>:</p>
+<ul>
+<li><code>productId</code> (string): ID du produit.</li>
+</ul>
+<hr />
+<h2 id="codes-derreur-communs">Codes d'erreur communs</h2>
+<ul>
+<li><strong>400</strong>: Requête mal formée.</li>
+<li><strong>404</strong>: Ressource introuvable.</li>
+<li><strong>500</strong>: Erreur interne du serveur.</li>
+</ul>
+<hr />
+<h2 id="exemples-dutilisation">Exemples d'utilisation</h2>
+<h3 id="lister-les-produits_1">Lister les produits</h3>
+<pre><code class="language-bash">curl -X GET https://&lt;base-url&gt;/&lt;stage&gt;/products
+</code></pre>
+<h3 id="ajouter-un-produit">Ajouter un produit</h3>
+<pre><code class="language-bash">curl -X POST https://votre-api-url.com/dev/products \
+-H &quot;Content-Type: application/json&quot; \
+-d '{
+  &quot;Name&quot;: &quot;Nouveau Produit&quot;,
+  &quot;Category&quot;: &quot;Catégorie&quot;,
+  &quot;Description&quot;: &quot;Description du produit&quot;
+}'
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../database/" class="btn btn-neutral float-left" title="Base de données"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../devops/" class="btn btn-neutral float-right" title="DevOps">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../database/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../devops/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
