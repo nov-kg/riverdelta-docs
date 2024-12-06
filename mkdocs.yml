@@ -3,8 +3,9 @@ nav:
 - Accueil: index.md
 - Architecture: architecture.md
 - Base de données: database.md
+- API: api.md
 - DevOps: devops.md
 theme: 
-  name: 'mkdocs'
+  name: 'readthedocs'
   color_mode: 'dark'
   nav_style: 'dark'
