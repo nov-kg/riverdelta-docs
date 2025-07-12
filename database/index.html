@@ -50,15 +50,21 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Base de données</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#products">Products</a>
+    <li class="toctree-l2"><a class="reference internal" href="#products-service">Products Service</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#product-catalog-item">Product Catalog Item</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#product-lot">Product Lot</a>
+    <li class="toctree-l3"><a class="reference internal" href="#product-catalog-collection">Product Catalog Collection</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#transactions">Transactions</a>
+    <li class="toctree-l2"><a class="reference internal" href="#inventory-service">Inventory Service</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#product-lot-collection">Product Lot Collection</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#transactions">Transactions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#production-collection">Production Collection</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#accounts">Accounts</a>
     </li>
@@ -73,10 +79,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../api/">API</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../devops/">DevOps</a>
                 </li>
               </ul>
       </div>
@@ -103,53 +105,72 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="base-de-donnee">Base de donnée</h1>
-<h2 id="products">Products</h2>
-<h3 id="product-catalog-item">Product Catalog Item</h3>
+<p>La base de donnée est organisée également selon les service présentés dans [[architecture.md]]</p>
+<h2 id="products-service">Products Service</h2>
+<h3 id="product-catalog-collection">Product Catalog Collection</h3>
+<p>Le catalogue produit fournit tous les <em>product</em> qui peuvent être utilisé par les autres services.</p>
 <p>Partition Key: <code>productId</code></p>
 <pre><code class="language-json">{
     &quot;productId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;,
+    &quot;archived&quot;: true, // boolean
     &quot;name&quot;: &quot;Ananas&quot;,
     &quot;description&quot;: &quot;Matière première, Ananas&quot;,
-    &quot;category&quot;: &quot;Fruit&quot;,
-    &quot;properties&quot;: {}
+    &quot;type&quot;: &quot;Produit fini&quot; // &quot;Produit fini&quot; ou &quot;Matière première
 }
 </code></pre>
-<h3 id="product-lot">Product Lot</h3>
+<h2 id="inventory-service">Inventory Service</h2>
+<h3 id="product-lot-collection">Product Lot Collection</h3>
+<p>Un <em>product lot</em> représente un lot différent d'un produit (produit fini ou matière première). C'est à ce niveau que les stocks sont gérés.</p>
 <p>Primary Key: productLotId,
 Sort Key: productId</p>
 <pre><code class="language-json">{
     &quot;productLotId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;,
     &quot;productId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to catalog
-    &quot;type&quot;: &quot;Raw material&quot;, // or finished product
+    &quot;type&quot;: &quot;raw&quot;, // &quot;raw&quot; OR &quot;end-product&quot;
+    &quot;expirationDate&quot;: &quot;None&quot;, // Expiration date unmanaged yet
     &quot;name&quot;: &quot;Ananas&quot;,
-    &quot;supplierId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to accounts table
     &quot;lotNumber&quot;: &quot;3728373&quot;,
     &quot;unit&quot;: &quot;pièce&quot;,
-    &quot;transactionLines&quot;: [{
-        &quot;transactionId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to transaction
-        &quot;type&quot;: &quot;in&quot;, // in, out
-        &quot;from&quot;: &quot;Location&quot;,
-        &quot;to&quot;: &quot;Location&quot;,
-        &quot;quantity&quot;: 4
-    }],
     &quot;inventory&quot;: [{
         &quot;stockQuantity&quot;: 20,
-        &quot;location&quot;: &quot;Goma POS&quot;,
+        &quot;location&quot;: &quot;Kimpese&quot;,
+    }]
+}
+</code></pre>
+<h3 id="transactions">Transactions</h3>
+<p>Une transaction représente un changement de stock, que ce soit une réception, sortie ou production. Les transactions permettent d'avoir l'historique détaillé d'un stock.</p>
+<pre><code class="language-json">{
+    &quot;transactionId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;,
+    &quot;fromLocation&quot;: &quot;Kinshasa&quot;,
+    &quot;toLocation&quot;: &quot;Goma POS&quot;,
+    &quot;transactionType&quot;: &quot;transport&quot;, // sale, purchase
+    &quot;transactionDate&quot;: 2024-12-31,
+    &quot;productLots&quot;: [{
+        &quot;lotId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ID of a Product Lot
+        &quot;quantity&quot;: 25
     }],
     &quot;properties&quot;: {}
 }
 </code></pre>
-<h2 id="transactions">Transactions</h2>
+<h2 id="production-collection">Production Collection</h2>
+<p><strong>Partition Key</strong>: location
+<strong>Sort Key</strong>: productionDate</p>
 <pre><code class="language-json">{
-    &quot;transactionId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;,
-    &quot;from&quot;: &quot;Kinshasa&quot;,
-    &quot;to&quot;: &quot;Goma POS&quot;,
-    &quot;Type&quot;: &quot;Transport&quot;, // Sale, Purchase
-    &quot;TransactionDate&quot;: 2024-12-31,
-    &quot;Properties&quot;: {}
+    &quot;productionId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;,
+    &quot;location&quot;: &quot;Kimpese&quot;,
+    &quot;inputs&quot;: [{
+        &quot;productLotId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to ProductLot
+        &quot;quantity&quot;: 20
+    }],
+    &quot;outputs&quot;: [{
+        &quot;productLotId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to ProductLot
+        &quot;quantity&quot;: 20
+    }],
+    &quot;productionDate&quot;: 2024-31-12,
 }
 </code></pre>
 <h2 id="accounts">Accounts</h2>
+<p>Collection not implemented yet.</p>
 <pre><code class="language-json">{
     &quot;accountID&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;,
     &quot;AccountType&quot;: &quot;Supplier&quot;, // Supplier ou Customer 
@@ -165,8 +186,8 @@ Sort Key: productId</p>
 </code></pre>
 <h2 id="other-entities">Other Entities</h2>
 <h3 id="properties">Properties</h3>
-<p>Properties gives metadata information about the entity, it covers most entities in the database.</p>
-<pre><code class="language-json">&quot;Properties&quot;: {
+<p>NOT IMPLEMENTED. Properties gives metadata information about the entity, it covers most entities in the database.</p>
+<pre><code class="language-json">&quot;properties&quot;: {
     &quot;CreatedBy&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to user
     &quot;CreatedAt&quot;: &quot;2022-12-27 08:26:49.219717&quot;,
     &quot;UpdatedBy&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to user

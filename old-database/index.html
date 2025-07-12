@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>DevOps - Elembo Docs</title>
+    <title>Old database - Elembo Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "DevOps";
-        var mkdocs_page_input_path = "devops.md";
+        var mkdocs_page_name = "Old database";
+        var mkdocs_page_input_path = "old-database.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -55,16 +55,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../api/">API</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">DevOps</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#environnement">Environnement</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#deploiements">Déploiements</a>
-    </li>
-    </ul>
-                </li>
-              </ul>
       </div>
     </div>
     </nav>
@@ -79,7 +69,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">DevOps</li>
+      <li class="breadcrumb-item active">Old database</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -88,47 +78,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="devops">DevOps</h1>
-<h2 id="environnement">Environnement</h2>
-<table>
-<thead>
-<tr>
-<th>Environnement</th>
-<th>Description</th>
-<th>API</th>
-<th>App</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>dev</code></td>
-<td>Environnement uniquement à but de développement, non stable</td>
-<td>https://c0zxxa808l.execute-api.eu-west-3.amazonaws.com/dev</td>
-<td>https://dev.d2m9fd2puxvkv3.amplifyapp.com/</td>
-</tr>
-<tr>
-<td><code>test</code></td>
-<td>Spécification prête à la validation par l'équipe d'Elembo</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>prod</code></td>
-<td>Environnement de production</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="deploiements">Déploiements</h2>
-<p>Le frontend se déploie automatiquement dans l'environnement relatif à la branche du même nom. Exemple: un merge sur le branche <code>dev</code> déploiera le frontend automatiquement sur le déploiement dev dans Amplify.</p>
-<p>Le backend est pour le moment développé directement via la console web AWS et déployée lors du développement. Un CI/CD est nécessaire pour passer en test.</p>
+                <pre><code class="language-json">{
+    &quot;productLotId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;,
+    &quot;productId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to catalog
+    &quot;type&quot;: &quot;raw&quot;, // &quot;raw&quot; OR &quot;finished&quot;
+    &quot;name&quot;: &quot;Ananas&quot;,
+    &quot;supplierId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to accounts table
+    &quot;lotNumber&quot;: &quot;3728373&quot;,
+    &quot;expirationDate&quot;: &quot;2024-12-31&quot;, // ISO8601 date
+    &quot;unit&quot;: &quot;pièce&quot;,
+    &quot;transactionLines&quot;: [{
+        &quot;transactionId&quot;: &quot;67103367-4da4-49c9-b1bf-d8be11c07f51&quot;, // ref to transaction
+        &quot;type&quot;: &quot;in&quot;, // in, out, production-usage, production-creation
+        &quot;from&quot;: &quot;Location&quot;,
+        &quot;to&quot;: &quot;Location&quot;,
+        &quot;quantity&quot;: 4
+    }],
+    &quot;productionLines&quot;: [{
+        &quot;location&quot;: &quot;Location&quot;,
+        &quot;quantity&quot;: 5
+    }],
+    &quot;inventory&quot;: [{
+        &quot;stockQuantity&quot;: 20,
+        &quot;location&quot;: &quot;Goma POS&quot;,
+    }],
+    &quot;properties&quot;: {}
+}
+</code></pre>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../api/" class="btn btn-neutral float-left" title="API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-    </div>
 
   <hr/>
 
@@ -149,8 +128,6 @@
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
-    
-      <span><a href="../api/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
