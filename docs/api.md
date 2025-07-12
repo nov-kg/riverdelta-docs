@@ -1,7 +1,11 @@
 
 # Documentation de l'API
 
-Bienvenue dans l'API Produits ! Cette API permet de gérer toutes les requêtes backend.
+Cette API permet de gérer toutes les requêtes backend et est organisée en 4 sections :
+
+- Produits : pour la gestion des matières premières et des produits finis
+- Inventaire : permet de gérer les stocks, d'entrer et sortir des produits
+- Production : permet de gérer les événements de productions
 
 ## Base URL
 Les URLs de base de chaque environnement sont documenté dans [DevOps](devops.md).
@@ -10,10 +14,32 @@ https://<aws-api-gateway-url>/<stage>
 ```
 
 ## Produits
+### Créer un produit
+Ajoute un nouveau produit à la base de données.
+
+`POST /product`  
+
+
+**Corps de la requête**:
+```json
+{
+  "Name": "Produit C",
+  "Category": "Catégorie 3",
+  "Description": "Description du produit C",
+}
+```
+
+**Réponse**:
+
+- **Code 201**: Produit créé avec succès.
+- **Code 400**: Erreur dans les données envoyées.
+
+---
+
 ### Lister les produits
 Récupère la liste de tous les produits disponibles.
 
-`GET /products`  
+`GET /product/list`  
 
 **Réponse**:
 ```json
@@ -34,11 +60,10 @@ Récupère la liste de tous les produits disponibles.
 ```
 
 ---
-
 ### Récupérer les détails d'un produit
 Récupère les détails d’un produit spécifique.
 
-`GET /products/{productId}`  
+`GET /product/{productId}`  
 
 **Paramètre d'URL**:
 - `productId` (string): ID du produit.
@@ -55,31 +80,10 @@ Récupère les détails d’un produit spécifique.
 
 ---
 
-### Créer un produit
-Ajoute un nouveau produit à la base de données.
-
-`POST /products`  
-
-
-**Corps de la requête**:
-```json
-{
-  "Name": "Produit C",
-  "Category": "Catégorie 3",
-  "Description": "Description du produit C",
-}
-```
-
-**Réponse**:
-
-- **Code 201**: Produit créé avec succès.
-- **Code 400**: Erreur dans les données envoyées.
-
----
 
 ### Mettre à jour un produit
 
-`PUT /products/{productId}`
+`PUT /products/{productId}/edit`
 
 **Paramètres d'URL**:
 
@@ -102,7 +106,7 @@ Ajoute un nouveau produit à la base de données.
 ### Supprimer un produit
 Supprime un produit spécifique.
 
-`DELETE/products/{productId}`  
+`DELETE /products/{productId}`  
 
 **Paramètres d'URL**:
 
@@ -114,7 +118,7 @@ Supprime un produit spécifique.
 - **Code 404**: Produit non trouvé.
 
 ---
-## Lots
+## Inventaire
 ### Créer un nouveau lot
 Créer un nouveau lot. Cet API crée une transaction et ajoute un nouveau lot pour le produit désigné. La transaction est automatiquement liée dans le lot.
 
@@ -145,6 +149,25 @@ Envoi la liste des lots d'un produit. Pour chaque lot, retourne également les i
 **Paramètres d'URL**:
 
   - `productId` (string): ID du produit.
+
+---
+### Sortir un produit de stock
+Permet de sortir un produit, matière première ou produit fini de stocks.
+
+`POST /inventory/delivery`
+
+## Production
+### Créer une production
+
+`POST /production`
+ Permet de créer une production
+
+### Lister les productions
+
+`GET /production/list`
+
+**Réponse**: liste de productions
+
 
 ---
 

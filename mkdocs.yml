@@ -5,6 +5,7 @@ nav:
 - Base de données: database.md
 - API: api.md
 - DevOps: devops.md
+- File Structure: file-structure.md
 theme: 
   name: 'readthedocs'
   color_mode: 'dark'

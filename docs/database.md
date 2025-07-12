@@ -1,53 +1,74 @@
 # Base de donnée
+La base de donnée est organisée également selon les service présentés dans [[architecture.md]]
 
-## Products
-### Product Catalog Item
+## Products Service
+### Product Catalog Collection
+Le catalogue produit fournit tous les _product_ qui peuvent être utilisé par les autres services.
+
 Partition Key: `productId`
 ```json
 {
     "productId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
     "name": "Ananas",
     "description": "Matière première, Ananas",
-    "category": "Fruit",
-    "properties": {}
+    "type": "raw" // raw or finished
 }
 ```
-### Product Lot
+
+## Inventory Service
+### Product Lot Collection
+Un _product lot_ représente un lot différent d'un produit (produit fini ou matière première). C'est à ce niveau que les stocks sont gérés.
+
 Primary Key: productLotId,
 Sort Key: productId
 ```json
 {
     "productLotId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
     "productId": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to catalog
-    "type": "Raw material", // or finished product
+    "type": "raw", // "raw" OR "end-product"
     "name": "Ananas",
-    "supplierId": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to accounts table
     "lotNumber": "3728373",
     "unit": "pièce",
-    "transactionLines": [{
-        "transactionId": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to transaction
-        "type": "in", // in, out
-        "from": "Location",
-        "to": "Location",
-        "quantity": 4
-    }],
     "inventory": [{
         "stockQuantity": 20,
         "location": "Goma POS",
+    }]
+}
+```
+### Transactions
+Une trans
+```json
+{
+    "transactionId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
+    "from_location": "Kinshasa",
+    "to_location": "Goma POS",
+    "type": "transport", // sale, purchase
+    "transactionDate": 2024-12-31,
+    "productLots": [{
+        "productId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
+        "quantity": 25
     }],
     "properties": {}
 }
 ```
 
-## Transactions
+## Production Collection
+**Partition Key**: location
+**Sort Key**: productionDate
 ```json
 {
-    "transactionId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
-    "from": "Kinshasa",
-    "to": "Goma POS",
-    "Type": "Transport", // Sale, Purchase
-    "TransactionDate": 2024-12-31,
-    "Properties": {}
+    "productionId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
+    "location": "Kimpese",
+    "inputs": [{
+        "productLotId": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to ProductLot
+        "quantity": 20
+    }],
+    "outputs": [{
+        "productLotId": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to ProductLot
+        "quantity": 20
+    }],
+    "productionDate": 2024-31-12,
+    "properties": {}
 }
 ```
 
@@ -71,7 +92,7 @@ Sort Key: productId
 ### Properties
 Properties gives metadata information about the entity, it covers most entities in the database.
 ```json
-"Properties": {
+"properties": {
     "CreatedBy": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to user
     "CreatedAt": "2022-12-27 08:26:49.219717",
     "UpdatedBy": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to user
