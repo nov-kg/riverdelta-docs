@@ -10,7 +10,7 @@
 - Material UI : Librairie de composants pour l'interface utilisateur
 
 ## Diagramme
-![Architecture Diagram](assets/riverdelta-arch.png)
+![Architecture Diagram](assets/architecture-Container_Diagram.jpg)
 
 ## Frontend
 Le frontend est construit avec React sur Vite.js. L'application web résultante fonctionne sur n'importe quel navigateur, mobile ou desktop.

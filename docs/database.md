@@ -9,9 +9,10 @@ Partition Key: `productId`
 ```json
 {
     "productId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
+    "archived": true, // boolean
     "name": "Ananas",
     "description": "Matière première, Ananas",
-    "type": "raw" // raw or finished
+    "type": "Produit fini" // "Produit fini" ou "Matière première
 }
 ```
 
@@ -26,26 +27,28 @@ Sort Key: productId
     "productLotId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
     "productId": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to catalog
     "type": "raw", // "raw" OR "end-product"
+    "expirationDate": "None", // Expiration date unmanaged yet
     "name": "Ananas",
     "lotNumber": "3728373",
     "unit": "pièce",
     "inventory": [{
         "stockQuantity": 20,
-        "location": "Goma POS",
+        "location": "Kimpese",
     }]
 }
 ```
 ### Transactions
-Une trans
+Une transaction représente un changement de stock, que ce soit une réception, sortie ou production. Les transactions permettent d'avoir l'historique détaillé d'un stock.
+
 ```json
 {
     "transactionId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
-    "from_location": "Kinshasa",
-    "to_location": "Goma POS",
-    "type": "transport", // sale, purchase
+    "fromLocation": "Kinshasa",
+    "toLocation": "Goma POS",
+    "transactionType": "transport", // sale, purchase
     "transactionDate": 2024-12-31,
     "productLots": [{
-        "productId": "67103367-4da4-49c9-b1bf-d8be11c07f51",
+        "lotId": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ID of a Product Lot
         "quantity": 25
     }],
     "properties": {}
@@ -68,11 +71,12 @@ Une trans
         "quantity": 20
     }],
     "productionDate": 2024-31-12,
-    "properties": {}
 }
 ```
 
 ## Accounts
+Collection not implemented yet.
+
 ```json
 {
     "accountID": "67103367-4da4-49c9-b1bf-d8be11c07f51",
@@ -90,7 +94,7 @@ Une trans
 
 ## Other Entities
 ### Properties
-Properties gives metadata information about the entity, it covers most entities in the database.
+NOT IMPLEMENTED. Properties gives metadata information about the entity, it covers most entities in the database.
 ```json
 "properties": {
     "CreatedBy": "67103367-4da4-49c9-b1bf-d8be11c07f51", // ref to user
